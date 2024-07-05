@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="artisan_management.report_artisans_by_state">
+        <t t-call="web.external_layout">
+            <div class="container">
+                <h1>Artisans by State</h1>
+                <main>
+                    <t t-foreach="artisans_by_state.items()" t-as="state_item">
+                        <div class="o_report_block mt-4">
+                            <h2><t t-esc="state_item[0].capitalize()"/></h2>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Mobile</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="state_item[1]" t-as="artisan">
+                                        <tr>
+                                            <td><t t-esc="artisan.name"/></td>
+                                            <td><t t-esc="artisan.email"/></td>
+                                            <td><t t-esc="artisan.mobile"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </main>                
+            </div>
+        </t>
+    </template>
+</odoo>

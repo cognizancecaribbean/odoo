@@ -1,0 +1,216 @@
+<odoo>
+    <data>
+
+        <template id="artisan_registration_template" name="Artisan Registration Form">
+            <t t-call="website.layout">
+                <div class="oe_structure">
+                    <div class="container mt-5">
+                        <h1>Artisan Registration</h1>
+                        <form action="/artisan/register/submit" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <!-- Personal Info -->
+                                <div class="col-md-12 mb-4">
+                                    <h3 class="mt-4">Personal Information</h3>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="first_name">First Name</label>
+                                        <input type="text" name="first_name" id="first_name" class="form-control mt-1" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="last_name">Last Name</label>
+                                        <input type="text" name="last_name" id="last_name" class="form-control mt-1" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <select name="gender" id="gender" class="form-control mt-1">
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" name="email" id="email" class="form-control mt-1" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="home_phone">Home Phone</label>
+                                        <input type="text" name="home_phone" id="home_phone" class="form-control mt-1" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="mobile">Mobile</label>
+                                        <input type="text" name="mobile" id="mobile" class="form-control mt-1" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="id_type">ID Type</label>
+                                        <select name="id_type" id="id_type" class="form-control mt-1">
+                                            <option value="id_card">ID Card</option>
+                                            <option value="dp">Drivers Permit</option>
+                                            <option value="passport">Passport</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="id_number">ID Number</label>
+                                        <input type="text" name="id_number" id="id_number" class="form-control mt-1" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="national_id">National ID</label>
+                                        <input type="file" name="national_id" id="national_id" class="form-control mt-1" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="birth_certificate">Birth Certificate</label>
+                                        <input type="file" name="birth_certificate" id="birth_certificate" class="form-control mt-1" required="required"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 mb-4">
+                                    <h3 class="mt-4">Business Information</h3>
+                                </div>                            
+                                <!-- Business Info -->
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="business_name">Business Name</label>
+                                        <input type="text" name="business_name" id="business_name" class="form-control mt-1" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="business_summary">Business Summary</label>
+                                        <textarea type="text" name="business_summary" id="business_summary" class="form-control mt-1" rows="3" required="required"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="street_address">Street Address</label>
+                                        <input type="text" name="street_address" id="street_address" class="form-control mt-1"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="city_town">City / Town</label>
+                                        <input type="text" name="city_town" id="city_town" class="form-control mt-1"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <select name="country" id="country" class="form-control mt-1" required="required">
+                                            <option value="trinidad">Trinidad</option>
+                                            <option value="tobago">Tobago</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4" id="isRegistered">
+                                    <div class="form-group">
+                                        <label for="is_registered">Is  Your Business Registration?</label>
+                                        <select name="is_registered" id="is_registered" class="form-control mt-1" required="required">
+                                            <option value="registered">Registered</option>
+                                            <option value="unregistered">Unregistered</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4 business-field-col">
+                                    <div class="form-group">
+                                        <label for="business_registration_date">Business Registration Date</label>
+                                        <input type="date" name="business_registration_date" id="business_registration_date" class="form-control business-field" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4 business-field-col">
+                                    <div class="form-group">
+                                        <label for="business_registration_number">Business Registration Number</label>
+                                        <input type="text" name="business_registration_number" id="business_registration_number" class="form-control business-field mt-1" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4 business-field-col">
+                                    <div class="form-group">
+                                        <label for="business_certificate">Business Certificate</label>
+                                        <input type="file" name="business_certificate" id="business_certificate" class="form-control business-field mt-1" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4 business-field-col">
+                                    <div class="form-group">
+                                        <label for="bir_no">BIR Number</label>
+                                        <input type="text" name="bir_no" id="bir_no" class="form-control business-field mt-1" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4 business-field-col">
+                                    <div class="form-group">
+                                        <label for="legal_structure">Legal Structure</label>
+                                        <select name="legal_structure" id="legal_structure" class="form-control business-field mt-1" required="required">
+                                            <option value="sole">Sole Proprietorship</option>
+                                            <option value="partnership">Partnership</option>
+                                            <option value="llc">LLC</option>
+                                            <option value="corporation">Corporation</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="website">Website</label>
+                                        <input type="text" name="website" id="website" class="form-control mt-1"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="facebook">Facebook</label>
+                                        <input type="text" name="facebook" id="facebook" class="form-control mt-1"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="twitter">Twitter</label>
+                                        <input type="text" name="twitter" id="twitter" class="form-control mt-1"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="instagram">Instagram</label>
+                                        <input type="text" name="instagram" id="instagram" class="form-control mt-1"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 mb-4">
+                                    <div class="form-group">
+                                        <label for="linkedin">LinkedIn</label>
+                                        <input type="text" name="linkedin" id="linkedin" class="form-control mt-1"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3 mb-5">Submit Registration Request</button>
+                        </form>
+                    </div>
+                </div>
+            </t>
+            <!-- Link your JavaScript file -->
+            <script type="text/javascript" src="/artisan_management/static/src/js/registration_form.js"></script>
+        </template>
+
+        <template id="registration_success_template" name="Registration Success">
+            <t t-call="website.layout">
+                <div class="container mt-5">
+                    <h1>Registration Successful</h1>
+                    <p>Thank you for registering. We will review your information and get back to you soon.</p>
+                </div>
+            </t>
+        </template>
+        
+    </data>
+</odoo>

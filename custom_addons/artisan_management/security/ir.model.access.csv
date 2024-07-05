@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_artisan_registration_user,access.artisan.registration.user,model_artisan_registration,base.group_user,1,1,1,1
+access_artisan_tags_user, access.artisan.tags.user,model_artisan_tag,base.group_user,1,1,1,1
+access_artisan_activity_logs_user, access.artisan.activity.logs.user,model_artisan_activity_log,base.group_user,1,1,1,1

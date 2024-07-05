@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="artisan_management.ArtisanDashboardUI">
+        <t t-set="scripts" t-snippet="web.assets_frontend">
+            <!-- Include ChartJS from CDN -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        </t>
+        <div class="o_action_manager" style="direction: ltr; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; flex: 1 1 auto; height: 100%; overflow: hidden;overflow-y: auto; max-height: 100vh;">
+            <div class="container mt-5">
+                <h1>Artisan Dashboard</h1>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="row">
+                            <!-- Charts -->
+                            <div class="col-sm-12 col-md-6 mt-4 mb-2">
+                                <h3>Current State</h3>
+                                <canvas id="currentStateChart"></canvas>
+                            </div>
+                            <div class="col-sm-12 col-md-6 mt-4 mb-2">
+                                <h3>YTD Totals</h3>
+                                <canvas id="ytdChart"></canvas>
+                            </div>
+                            <div class="col-sm-12 mt-4 mb-2">
+                                <h3>Totals by Tag Chart</h3>
+                                <canvas id="tagsChart"></canvas>
+                            </div>
+                            <div class="col-sm-12 mt-4 mb-2">
+                                <h2>Current State</h2>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total Artisans'" total="state.totalArtisans"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total Pending'" total="state.totalPending"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total Vetting'" total="state.totalVetting"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total Approved'" total="state.totalApproved"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total Denied'" total="state.totalDenied"/>
+                            </div>
+                            <div class="col-sm-12 mt-4">
+                                <h2>Year To Date</h2>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'YTD Registrations'" total="state.ytdRegistrations"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'YTD Approvals'" total="state.ytdApprovals"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'YTD Denials'" total="state.ytdDenials"/>
+                            </div>
+                        </div> <!-- Close row div -->
+                    </div> <!-- Close col-lg-9 div -->
+                    <div class="col-lg-3">
+                        <div class="row mt-4 mb-2">
+                            <div class="col-md-12">
+                                <h3>Totals by Tag</h3>
+                                <TagsTable tags="state.totalsByTag"/>
+                            </div>
+                        </div>
+                    </div> <!-- Close col-lg-3 div -->
+                </div> <!-- Close row div -->          
+            </div> <!-- Close container div -->
+        </div> <!-- Close o_action_manager div -->
+    </t>
+</templates>

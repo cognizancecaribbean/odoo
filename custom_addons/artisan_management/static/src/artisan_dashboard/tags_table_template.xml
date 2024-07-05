@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="artisan_management.TagsTable">
+        <div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tag Name</th>
+                            <th>Count</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="props.tags" t-as="tag" t-key="tag.id">
+                            <tr>
+                                <td><t t-esc="tag.tag_name"/></td>
+                                <td><t t-esc="tag.count"/></td>
+                                <td>
+                                    <button type="button" t-on-click="() => this.openArtisansTreeView(tag.action_id)"
+                                        class="btn btn-primary">
+                                    View
+                                    </button>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Artisan Tree View -->
+        <record id="view_tree_artisan_registration" model="ir.ui.view">
+            <field name="name">artisan.registration.tree</field>
+            <field name="model">artisan.registration</field>
+            <field name="arch" type="xml">
+                <tree string="Artisan Registration">
+                    <field name="artisan_id" invisible="state != 'approved'"/>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="email"/>
+                    <field name="home_phone"/>
+                    <field name="mobile"/>
+                    <field name="business_name"/>
+                    <field name="country"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>  
+
+        <!-- Artisan Tags Tree View -->
+        <record id="view_tree_artisan_tag" model="ir.ui.view">
+            <field name="name">artisan.tag.tree</field>
+            <field name="model">artisan.tag</field>
+            <field name="arch" type="xml">
+                <tree string="Artisan Tag">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>    
+
+        <!-- Artisan Activity Tree View -->
+        <record id="view_artisan_activity_log_tree" model="ir.ui.view">
+            <field name="name">artisan.activity.log.tree</field>
+            <field name="model">artisan.activity.log</field>
+            <field name="arch" type="xml">
+                <tree name="Artisan Activity">
+                    <field name="activity_type"/>
+                    <field name="artisan_id" string="Artisan"/>
+                    <field name="activity_date"/>
+                </tree>
+            </field>
+        </record>    
+
+        <!-- Artisan Form View -->
+        <record id="view_artisan_registration_form" model="ir.ui.view">
+            <field name="name">artisan.registration.form</field>
+            <field name="model">artisan.registration</field>
+            <field name="arch" type="xml">
+                <form string="Artisan Registration">
+
+                    <!-- Action Buttons -->
+                    <header>                    
+                        <button name="action_vet" string="Move to Vetting" type="object" class="btn btn-primary" invisible="state != 'pending'"/>
+                        <button name="action_approve" string="Approve" type="object" class="btn btn-success" invisible="state != 'vetting'"/>
+                        <button name="action_deny" string="Deny" type="object" class="btn btn-danger" invisible="state != 'vetting'"/>   
+                        <button name="action_revert_to_vetting" string="Revert to Vetting" type="object" class="btn btn-warning" invisible="state != 'denied'"/>             
+                    </header>     
+
+                    <!-- Form Body -->
+                    <sheet>
+                        <group>
+                            <!-- Personal Info -->
+                            <group string="Personal Info">
+                                    <field name="artisan_id" invisible="state != 'approved'"/>
+                                    <field name="first_name"/>
+                                    <field name="last_name"/>
+                                    <field name="gender"/>                            
+                                    <field name="email"/>
+                                    <field name="home_phone"/>
+                                    <field name="mobile"/>
+                                    <field name="id_type"/>
+                                    <field name="id_number"/>
+                                    <field name="national_id" filename="national_id_filename"/>
+                                    <field name="birth_certificate" filename="birth_certificate_filename"/>
+                                    <field name="state" readonly="1"/>
+                            
+                            </group>
+                            <!-- Business Info -->
+                            <group string="Business Info">        
+                                <field name="business_name"/>
+                                <field name="business_summary"/>
+                                <field name="street_address"/>
+                                <field name="city_town"/>
+                                <field name="country"/>
+                                <field name="is_registered" widget="radio"/>
+                                <field name="business_registration_date" invisible="is_registered == 'unregistered'" required="is_registered == 'registered'"/>
+                                <field name="business_registration_number" invisible="is_registered == 'unregistered'" required="is_registered == 'registered'"/>
+                                <field name="business_certificate" filename="business_certificate" invisible="is_registered == 'unregistered'" required="is_registered == 'registered'"/>
+                                <field name="bir_no" invisible="is_registered == 'unregistered'" required="is_registered == 'registered'"/>
+                                <field name="legal_structure" invisible="is_registered == 'unregistered'" required="is_registered == 'registered'"/>
+                                
+                                
+                                <field name="website"/>
+                                <field name="facebook"/>
+                                <field name="twitter"/>
+                                <field name="instagram"/>
+                                <field name="linkedin"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="tags_ids" widget="many2many_tags"/>
+                        </group>                    
+                    </sheet>
+
+                    <!-- Chatter -->
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- Artisan Actvity Form View -->
+        <record id="view_artisan_activity_log_form" model="ir.ui.view">
+            <field name="name">artisan.activity.log.form</field>
+            <field name="model">artisan.activity.log</field>
+            <field name="arch" type="xml">
+                <form string="Artisan Activity Log">
+                    <sheet>
+                        <group>
+                            <field name="artisan_id" readonly="1"/>
+                            <field name="activity_type"/>
+                            <field name="activity_date"/>
+                            <!-- <field name="name" readonly="1"/> -->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>    
+
+        <!-- ArtisanDashboard Action -->
+        <record id="action_artisan_dashboard" model="ir.actions.client">
+            <field name="name">Dashboard</field>
+            <field name="tag">artisan_dashboard_action</field>
+        </record>    
+        
+        <!-- Artisan Register Action -->
+        <record id="action_artisan_register" model="ir.actions.act_window">
+            <field name="name">Artisan Register</field>
+            <field name="res_model">artisan.registration</field>
+            <field name="view_mode">tree,form</field>
+        </record>    
+        <!-- Action for Total Pending -->
+        <record id="action_total_pending" model="ir.actions.act_window">
+            <field name="name">Pending Artisans</field>
+            <field name="res_model">artisan.registration</field>
+            <field name="view_mode">tree,form</field> <!-- Adjust view modes as needed -->
+            <field name="domain">[('state','=','pending')]</field> <!-- Adjust domain filter -->
+        </record>    
+        <!-- Action for Total Vetting -->
+        <record id="action_total_vetting" model="ir.actions.act_window">
+            <field name="name">Vetting Artisans</field>
+            <field name="res_model">artisan.registration</field>
+            <field name="view_mode">tree,form</field> <!-- Adjust view modes as needed -->
+            <field name="domain">[('state','=','vetting')]</field> <!-- Adjust domain filter -->
+        </record>
+        <!-- Action for Total Approved -->
+        <record id="action_total_approved" model="ir.actions.act_window">
+            <field name="name">Approved Artisans</field>
+            <field name="res_model">artisan.registration</field>
+            <field name="view_mode">tree,form</field> <!-- Adjust view modes as needed -->
+            <field name="domain">[('state','=','approved')]</field> <!-- Adjust domain filter -->
+        </record>
+        <!-- Action for Total Denied -->
+        <record id="action_total_denied" model="ir.actions.act_window">
+            <field name="name">Denied Artisans</field>
+            <field name="res_model">artisan.registration</field>
+            <field name="view_mode">tree,form</field> <!-- Adjust view modes as needed -->
+            <field name="domain">[('state','=','denied')]</field> <!-- Adjust domain filter -->
+        </record>
+
+        <!-- YTD Totals -->
+        <record id="action_ytd_registrations" model="ir.actions.act_window">
+            <field name="name">YTD Registrations</field>
+            <field name="res_model">artisan.activity.log</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('activity_type', '=', 'registration')]</field>
+        </record>
+        <record id="action_ytd_approvals" model="ir.actions.act_window">
+            <field name="name">YTD Approvals</field>
+            <field name="res_model">artisan.activity.log</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('activity_type', '=', 'approval')]</field>
+        </record>
+        <record id="action_ytd_denials" model="ir.actions.act_window">
+            <field name="name">YTD Denials</field>
+            <field name="res_model">artisan.activity.log</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('activity_type', '=', 'denial')]</field>
+        </record>
+
+        <!-- Artisan Tag Action -->
+        <record id="action_artisan_tags" model="ir.actions.act_window">
+            <field name="name">Artisan Tags</field>
+            <field name="res_model">artisan.tag</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Define the server action update tags -->
+        <record id="action_update_tag_actions" model="ir.actions.server">
+            <field name="name">Update Tag Actions</field>
+            <field name="model_id" ref="model_artisan_tag"/>
+            <field name="state">code</field>
+            <field name="code">model.update_actions_for_existing_tags()</field>
+            <field name="type">ir.actions.server</field>
+        </record>
+
+        <!-- Define action for artisan by state report -->
+        <record id="action_report_artisans_by_state" model="ir.actions.report">
+            <field name="name">Artisans by State</field>
+            <!-- <field name="type">ir.actions.report</field> -->
+            <field name="model">artisan.registration</field>
+            <field name="report_name">artisan_management.report_artisans_by_state</field>
+            <field name="report_file">artisan_management.report_artisans_by_state</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="model_artisan_registration"/>
+            <field name="binding_type">report</field>
+        </record>    
+
+        <!-- Define action for artisan by activity type report -->
+    <record id="action_report_artisans_by_activity_type" model="ir.actions.report">
+        <field name="name">Artisans by Activity Type</field>
+        <field name="model">artisan.activity.log</field>
+        <field name="report_name">artisan_management.report_artisans_by_activity_type</field>
+        <field name="report_file">artisan_management.report_artisans_by_activity_type</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="model_artisan_activity_log"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+        <!-- Top level menu item for the custom module -->
+        <menuitem id="menu_artisan_management_root" name="Artisan Management" sequence="1"/>
+
+        <!-- Submenu item for Artisan Staff Dashboard -->
+        <menuitem id="menu_artisan_dashboard" name="Dashboard" parent="menu_artisan_management_root" action="action_artisan_dashboard" sequence="1"/>
+
+
+        <!-- Root Menu for Artisans Dropdown` -->
+        <menuitem id="menu_artisans" name="Artisans" parent="menu_artisan_management_root" sequence="2"/>
+
+        <!-- Submenu item for All Artisans -->
+        <menuitem id="all_artisans" name="All Artisans" parent="menu_artisans" action="action_artisan_register" sequence="1"/>
+        <!-- Submenu item for Pending Artisans -->
+        <menuitem id="pending_artisans" name="Pending Artisans" parent="menu_artisans" action="action_total_pending" sequence="2"/>
+        <!-- Submenu item for Vetting Artisans -->
+        <menuitem id="vetting_artisans" name="Vetting Artisans" parent="menu_artisans" action="action_total_vetting" sequence="3"/>
+        <!-- Submenu item for Approved Artisans -->
+        <menuitem id="approved_artisans" name="Approved Artisans" parent="menu_artisans" action="action_total_approved" sequence="3"/>
+        <!-- Submenu item for Denied Artisans -->
+        <menuitem id="denied_artisans" name="Denied Artisans" parent="menu_artisans" action="action_total_denied" sequence="4"/>
+
+        <!-- Submenu item for YTD Registrations -->
+        <menuitem id="menu_ytd_registrations" name="YTD Registrations" parent="menu_artisans" action="artisan_management.action_ytd_registrations"/>
+        <!-- Submenu item for YTD Approvals -->
+        <menuitem id="menu_ytd_approvals" name="YTD Approvals" parent="menu_artisans" action="artisan_management.action_ytd_approvals"/>
+        <!-- Submenu item for YTD Denials -->
+        <menuitem id="menu_ytd_denials" name="YTD Denials" parent="menu_artisans" action="artisan_management.action_ytd_denials"/>    
+
+
+        <!-- Root Menu for Artisan Tags Dropdown` -->
+        <menuitem id="menu_artisan_tags_root" name="Tags" parent="menu_artisan_management_root" sequence="3"/>
+
+        <!-- Submenu item for Artisan Tags -->
+        <menuitem id="menu_artisan_tags" name="Manage Tags" parent="menu_artisan_tags_root" action="action_artisan_tags" sequence="1"/>
+        <!-- Submenu item for updating all tag actions -->
+        <menuitem id="menu_update_tag_actions" name="Update Tag Actions" parent="menu_artisan_tags_root" action="action_update_tag_actions" sequence="2"/>
+
+
+        <!-- Root Menu for Artisan Reports Dropdown -->
+        <menuitem id="menu_artisan_reports_root" name="Reports" parent="menu_artisan_management_root" sequence="4"/>
+
+        <!-- Submenu item for Artisans by State -->
+        <menuitem id="menu_artisan_report_by_state" name="Artisans by State" parent="menu_artisan_reports_root" action="action_report_artisans_by_state" sequence="1"/>
+        
+        <!-- Submenu item for Artisans by Activity Type -->
+        <menuitem id="menu_artisan_report_by_activity_type" name="Artisans by Activity Type" parent="menu_artisan_reports_root" action="action_report_artisans_by_activity_type" sequence="2"/>    
+    </data>
+</odoo>
