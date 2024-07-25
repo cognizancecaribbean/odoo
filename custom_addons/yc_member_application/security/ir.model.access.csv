@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_member_application,access_member_application,model_member_application,base.group_user,1,1,1,1
-access_member_application_child,access_member_application_child,model_member_application_child,base.group_user,1,1,1,1
-access_member_application_document,access_member_application_document,model_member_application_document,base.group_user,1,1,1,1
-access_member_application_boat,access_member_application_boat,model_member_application_boat,base.group_user,1,1,1,1
-access_member_application_other_membership,access_member_application_other_membership,model_member_application_other_membership,base.group_user,1,1,1,1

@@ -1,0 +1,15 @@
+<odoo>
+    <!-- Action for the custom form view -->
+    <record id="action_res_partner_custom" model="ir.actions.act_window">
+        <field name="name">Members</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_res_partner_tree_custom"/>
+        <field name="view_id" ref="view_res_partner_form_custom"/>
+        <field name="domain">[('status', '=', 'member')]</field>
+    </record>
+
+    <!-- Menu item for the custom form view -->
+    <menuitem id="menu_res_partner_root" name="Members Management" sequence="10" />
+    <menuitem id="menu_res_partner" name="Members" parent="menu_res_partner_root" action="action_res_partner_custom" sequence="10"/>
+</odoo>
