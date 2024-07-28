@@ -1,116 +1,577 @@
 <odoo>
-    <record id="view_res_partner_form_custom" model="ir.ui.view">
-        <field name="name">res.partner.form.custom</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form"/>
-        <field name="arch" type="xml">
-            <!-- Add custom fields to the existing form -->
-            <xpath expr="//form/sheet" position="inside">
-                <group>
-                    <group string="Personal Information">
-                        <field name="first_name"/>
-                        <field name="last_name"/>
-                        <field name="other_names"/>
-                        <field name="date_of_birth"/>
-                        <field name="marital_status"/>
-                        <field name="spouse_name"/>
-                    </group>
-                    <group string="Contact Information">
-                        <field name="phone"/>
-                        <field name="mobile"/>
-                        <field name="email"/>
-                        <field name="office_number"/>
-                    </group>
-                </group>
-                <group>
-                    <group string="Application Information">
-                        <field name="status"/>
-                        <field name="application_state"/>
-                        <field name="application_date"/>
-                        <field name="acknowledgment_date"/>
-                        <field name="interview_notice_date"/>
-                        <field name="interview_date"/>
-                        <field name="followup_date"/>
-                        <field name="welcome_letter_date"/>
-                        <field name="orientation_notice_date"/>
-                        <field name="orientation_date"/>
-                        <field name="bylaws_sent_date"/>
-                    </group>
-                </group>
-            </xpath>
 
-            <!-- Add tabs for Children, Documents, Boats, and Other Memberships -->
-            <xpath expr="//notebook" position="inside">
-                <page string="Children">
-                    <field name="children_ids">
-                        <tree>
-                            <field name="first_name"/>
-                            <field name="last_name"/>
-                            <field name="date_of_birth"/>
-                        </tree>
-                        <form>
+    <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Member Views >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+    <!-- Members Form View ///////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="view_members_management_form" model="ir.ui.view">
+        <field name="name">members.management.member.form</field>
+        <field name="model">members.management.member</field>
+        <field name="arch" type="xml">
+            <form string="Member">
+                <div class="o_form_sheet_bg">
+                    <sheet>
+                        <!-- Personal Information Group -->
+                        <group string="Personal Information">
                             <group>
                                 <field name="first_name"/>
                                 <field name="last_name"/>
+                                <field name="other_names"/>
                                 <field name="date_of_birth"/>
+                                <field name="marital_status"/>
+                                <field name="spouse_name"/>
                             </group>
-                        </form>
-                    </field>
-                </page>
-                <page string="Documents">
-                    <field name="document_ids">
-                        <tree>
-                            <field name="name"/>
-                        </tree>
-                        <form>
                             <group>
-                                <field name="name"/>
+                                <field name="home_number"/>
+                                <field name="mobile_number"/>
+                                <field name="email"/>
+                                <field name="street_address"/>
+                                <field name="street_address2"/>
+                                <field name="city"/>
+                                <field name="zip"/>
+                                <field name="country_id"/>
                             </group>
-                        </form>
-                    </field>
-                </page>
-                <page string="Boats">
-                    <field name="boat_ids">
-                        <tree>
-                            <field name="name"/>
-                            <field name="size"/>
-                        </tree>
-                        <form>
                             <group>
-                                <field name="name"/>   
-                                <field name="size"/>
+                                <field name="profile_picture" widget="image" class="oe_avatar" options="{'preview_image': 'profile_picture', 'size': [90, 90]}"/>
                             </group>
-                        </form>
-                    </field>
-                </page>
-                <page string="Other Memberships">
-                    <field name="other_memberships_ids">
-                        <tree>
-                            <field name="organization"/>
-                            <field name="role"/>
-                        </tree>
-                        <form>
+                        </group>
+
+                        <!-- Business Information Group -->
+                        <group string="Business Information">
                             <group>
-                                <field name="organization"/>
-                                <field name="role"/>
+                                <field name="business_name"/>
+                                <field name="business_street_address"/>
+                                <field name="business_city"/>
+                                <field name="business_country_id"/>
                             </group>
-                        </form>
-                    </field>
-                </page>
-            </xpath>
+                            <group>
+                                <field name="occupation"/>
+                                <field name="nature_of_business" widget="text"/>
+                            </group>
+                        </group>
+
+                        <!-- Membership Information Group -->
+                        <group string="Membership Information">
+                            <group>
+                                <field name="membership_type"/>
+                            </group>
+                            <group>
+                                <field name="status"/>
+                                <field name="member_since"/>
+                            </group>
+                        </group>
+
+                        <!-- Application Process Log Tab -->
+                        <notebook>
+                            <!-- Children Tab -->
+                            <page string="Children">
+                                <field name="children_ids">
+                                    <tree>
+                                        <field name="first_name"/>
+                                        <field name="last_name"/>
+                                        <field name="date_of_birth"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="first_name"/>
+                                            <field name="last_name"/>
+                                            <field name="date_of_birth"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+                            <!-- Documents Tab -->
+                            <page string="Documents">
+                                <field name="document_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="file"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="file"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+                            <!-- Boats Tab -->
+                            <page string="Boats">
+                                <field name="boat_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="size"/>
+                                        <field name="engine"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="size"/>
+                                            <field name="engine"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+                            <!-- Other Memberships Tab -->
+                            <page string="Other Memberships">
+                                <field name="other_memberships_ids">
+                                    <tree>
+                                        <field name="organization"/>
+                                        <field name="role"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="organization"/>
+                                            <field name="role"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+                            <page string="Application Process Log">
+                                <group>
+                                    <group>
+                                        <field name="application_state"/>
+                                        <field name="application_date"/>
+                                        <field name="acknowledgment_date"/>
+                                        <field name="interview_notice_date"/>
+                                        <field name="interview_date"/>
+                                    </group>
+                                    <group>
+                                        <field name="followup_date"/>
+                                        <field name="welcome_letter_date"/>
+                                        <field name="orientation_notice_date"/>
+                                        <field name="orientation_date"/>
+                                        <field name="bylaws_sent_date"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </div>
+
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids"/>
+                </div>
+            </form>
         </field>
     </record>
-
-    <!-- Action for the custom form view -->
-    <record id="action_res_partner_custom" model="ir.actions.act_window">
-        <field name="name">Members</field>
-        <field name="res_model">res.partner</field>
-        <field name="view_mode">tree,form</field>
-        <!-- <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_partner_tree_custom')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_partner_form_custom')})]"/> -->
-        <field name="domain">[('status', '=', 'member')]</field>
+    <!-- Members Tree View ///////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="view_members_management_tree" model="ir.ui.view">
+        <field name="name">members.management.member.tree</field>
+        <field name="model">members.management.member</field>
+        <field name="arch" type="xml">
+            <tree string="Members" create="false">
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="email"/>
+                <field name="mobile_number"/>
+                <field name="status"/>
+                <field name="subscription_state"/>
+            </tree>
+        </field>
     </record>
+    <!-- Action for Active Members //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_view_active_members" model="ir.actions.act_window">
+        <field name="name">Active Members</field>
+        <field name="res_model">members.management.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_members_management_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_members_management_form')})]"/>
+        <field name="domain">[('status', '=', 'member'), ('subscription_state', '=', 'active')]</field>
+    </record>
+    <!-- Action for Expiring Members //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_view_expiring_members" model="ir.actions.act_window">
+        <field name="name">Expiring Members</field>
+        <field name="res_model">members.management.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_members_management_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_members_management_form')})]"/>
+        <field name="domain">[('status', '=', 'member'), ('subscription_state', '=', 'expiring')]</field>
+    </record>
+    <!-- Action for Expired Members //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_view_expired_members" model="ir.actions.act_window">
+        <field name="name">Expired Members</field>
+        <field name="res_model">members.management.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_members_management_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_members_management_form')})]"/>
+        <field name="domain">[('status', '=', 'member'), ('subscription_state', '=', 'expired')]</field>
+    </record>     
 
-    <!-- Menu item for the custom form view -->
-    <menuitem id="menu_res_partner_root" name="Members Management" sequence="10" />
-    <menuitem id="menu_res_partner" name="Members" parent="menu_res_partner_root" action="action_res_partner_custom" sequence="10"/>    
+
+    <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Application Views >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+    <!-- Applicant Form View ///////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="view_applicant_form" model="ir.ui.view">
+        <field name="name">members.management.member.applicant.form</field>
+        <field name="model">members.management.member</field>
+        <field name="arch" type="xml">
+            <form string="Applicant">
+                <div class="o_form_sheet_bg">
+                    <header>
+                        <!-- Button: Acknowledge Application -->
+                        <button name="%(action_acknowledge_application)d" type="action" string="Acknowledge Application" class="oe_highlight" invisible="application_state != 'new'"/>
+                        <!-- Button: Send Notice of Interview -->
+                        <button name="%(action_send_notice_of_interview)d" type="action" string="Send Notice of Interview" class="oe_highlight" invisible="application_state != 'acknowledged'"/>
+                        <!-- Button: Send Followup Letter -->
+                        <button name="%(action_followup_letter)d" type="action" string="Send Followup Letter" class="oe_highlight" invisible="application_state != 'interview'"/>
+                        <!-- Button: Send Welcome Letter -->
+                        <button name="%(action_welcome_letter)d" type="action" string="Send Welcome Letter" class="oe_highlight" invisible="application_state != 'followup'"/>
+                        <!-- Button: Send Orientation Notice -->
+                        <button name="%(action_orientation_notice)d" type="action" string="Send Orientation Notice" class="oe_highlight" invisible="application_state != 'welcomed'"/>
+                        <!-- Button: Send Bylaws -->
+                        <button name="%(action_bylaws)d" type="action" string="Send Bylaws" class="oe_highlight" invisible="application_state != 'orientation'"/>
+                        <!-- Button: Mark as Quote Sent -->
+                        <button name="%(action_quote_sent)d" type="action" string="Send Quote" class="oe_highlight" invisible="application_state != 'bylaws'"/>
+                        <!-- Button: Mark as Quote Signed -->
+                        <button name="%(action_quote_signed)d" type="action" string="Quote Signed" class="oe_highlight" invisible="application_state != 'quote_sent'"/>
+                        <!-- Button: Mark as Subscription Initialized -->
+                        <button name="%(action_sub_initialized)d" type="action" string="Initialize Subscription" class="oe_highlight" invisible="application_state != 'quote_signed'"/>
+                    </header>                
+                    <sheet>
+                        <!-- Personal Information Group -->
+                        <group string="Personal Information">
+                            <group>
+                                <field name="first_name"/>
+                                <field name="last_name"/>
+                                <field name="other_names"/>
+                                <field name="date_of_birth"/>
+                                <field name="marital_status"/>
+                                <field name="spouse_name"/>
+                            </group>
+                            <group>
+                                <field name="home_number"/>
+                                <field name="mobile_number"/>
+                                <field name="email"/>
+                                <field name="street_address"/>
+                                <field name="street_address2"/>
+                                <field name="city"/>
+                                <field name="zip"/>
+                                <field name="country_id"/>
+                            </group>
+                            <group>
+                                <field name="profile_picture" widget="image" class="oe_avatar" options="{'preview_image': 'profile_picture', 'size': [90, 90]}"/>
+                            </group>
+                        </group>
+
+                        <!-- Business Information Group -->
+                        <group string="Business Information">
+                            <group>
+                                <field name="business_name"/>
+                                <field name="business_street_address"/>
+                                <field name="business_city"/>
+                                <field name="business_country_id"/>
+                            </group>
+                            <group>
+                                <field name="occupation"/>
+                                <field name="nature_of_business" widget="text"/>
+                            </group>
+                        </group>
+
+                        <!-- Membership Information Group -->
+                        <group string="Membership Information">
+                            <group>
+                                <field name="membership_type"/>
+                            </group>
+                            <group>
+                                <field name="status"/>
+                                <field name="member_since"/>
+                            </group>
+                        </group>
+
+                        <!-- Application Process Log Tab -->
+                        <notebook>
+                            <page string="Application Process Log">
+                                <group>
+                                    <group>
+                                        <field name="application_state" readonly="1"/>
+                                        <field name="application_date" readonly="1"/>
+                                        <field name="acknowledgment_date" readonly="1"/>
+                                        <field name="interview_notice_date" readonly="1"/>
+                                        <field name="interview_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="followup_date" readonly="1"/>
+                                        <field name="welcome_letter_date" readonly="1"/>
+                                        <field name="orientation_notice_date" readonly="1"/>
+                                        <field name="orientation_date" readonly="1"/>
+                                        <field name="bylaws_sent_date" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>                        
+                            <!-- Children Tab -->
+                            <page string="Children">
+                                <field name="children_ids">
+                                    <tree>
+                                        <field name="first_name"/>
+                                        <field name="last_name"/>
+                                        <field name="date_of_birth"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="first_name"/>
+                                            <field name="last_name"/>
+                                            <field name="date_of_birth"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+                            <!-- Documents Tab -->
+                            <page string="Documents">
+                                <field name="document_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="file"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="file"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+                            <!-- Boats Tab -->
+                            <page string="Boats">
+                                <field name="boat_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="size"/>
+                                        <field name="engine"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="size"/>
+                                            <field name="engine"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+
+                            <!-- Other Memberships Tab -->
+                            <page string="Other Memberships">
+                                <field name="other_memberships_ids">
+                                    <tree>
+                                        <field name="organization"/>
+                                        <field name="role"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="organization"/>
+                                            <field name="role"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </div>
+
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!-- Applicant Tree View ///////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="view_applicant_tree" model="ir.ui.view">
+        <field name="name">members.management.member.applicant.tree</field>
+        <field name="model">members.management.member</field>
+        <field name="arch" type="xml">
+            <tree string="Applicants">
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="email"/>
+                <field name="mobile_number"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Action for New Applicants /////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_view_new_applicants" model="ir.actions.act_window">
+        <field name="name">New Applicants</field>
+        <field name="res_model">members.management.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_applicant_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_applicant_form')})]"/>
+        <field name="domain">[('status', '=', 'applicant'), ('application_state', '=', 'new')]</field>
+    </record>
+    <!-- Action for Acknowledged Applicants ////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_view_acknowledged_applicants" model="ir.actions.act_window">
+        <field name="name">Acknowledged Applicants</field>
+        <field name="res_model">members.management.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_applicant_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_applicant_form')})]"/>
+        <field name="domain">[('status', '=', 'applicant'), ('application_state', '=', 'acknowledged')]</field>
+    </record>    
+    <!-- Action for Applicants sent Notice of Interview ////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_view_notice_of_interview_applicants" model="ir.actions.act_window">
+        <field name="name">Sent Notice of Interview</field>
+        <field name="res_model">members.management.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_applicant_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_applicant_form')})]"/>
+        <field name="domain">[('status', '=', 'applicant'), ('application_state', '=', 'interview')]</field>
+    </record> 
+    <!-- Action for Applicants sent Followup Letter ////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_view_followup_letter_applicants" model="ir.actions.act_window">
+        <field name="name">Sent Followup Letter</field>
+        <field name="res_model">members.management.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_applicant_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_applicant_form')})]"/>
+        <field name="domain">[('status', '=', 'applicant'), ('application_state', '=', 'followup')]</field>
+    </record>   
+    <!-- Action for Applicants sent Welcome Letter //////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_view_welcome_letter_applicants" model="ir.actions.act_window">
+        <field name="name">Sent Welcome Letter</field>
+        <field name="res_model">members.management.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_applicant_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_applicant_form')})]"/>
+        <field name="domain">[('status', '=', 'applicant'), ('application_state', '=', 'welcome')]</field>
+    </record>      
+    <!-- Action for Applicants sent Orientation Notice //////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_view_orientation_notice_applicants" model="ir.actions.act_window">
+        <field name="name">Sent Orientation Notice</field>
+        <field name="res_model">members.management.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_applicant_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_applicant_form')})]"/>
+        <field name="domain">[('status', '=', 'applicant'), ('application_state', '=', 'orientation')]</field>
+    </record> 
+    <!-- Action for Applicants sent Bylaws //////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_view_bylaws_applicants" model="ir.actions.act_window">
+        <field name="name">Sent Bylaws</field>
+        <field name="res_model">members.management.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_applicant_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_applicant_form')})]"/>
+        <field name="domain">[('status', '=', 'applicant'), ('application_state', '=', 'bylaws')]</field>
+    </record>   
+
+    <!-- Action: Acknowledge Application ////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_acknowledge_application" model="ir.actions.server">
+        <field name="name">Acknowledge Application Receipt</field>
+        <field name="model_id" ref="model_members_management_member"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.write({'application_state': 'acknowledged', 'acknowledgment_date': datetime.date.today()})
+        </field>
+    </record>
+    <!-- Action: Send Notice of Interview ////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_send_notice_of_interview" model="ir.actions.server">
+        <field name="name">Send Notice of Interview</field>
+        <field name="model_id" ref="model_members_management_member"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.write({'application_state': 'interview', 'interview_notice_date': datetime.date.today()})
+        </field>
+    </record> 
+    <!-- Action: Send Followup Letter ////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_followup_letter" model="ir.actions.server">
+        <field name="name">Send Followup Letter</field>
+        <field name="model_id" ref="model_members_management_member"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.write({'application_state': 'followup', 'followup_date': datetime.date.today()})
+        </field>
+    </record>     
+    <!-- Action: Send Welcome Letter ////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_welcome_letter" model="ir.actions.server">
+        <field name="name">Send Welcome Letter</field>
+        <field name="model_id" ref="model_members_management_member"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.write({'application_state': 'welcome', 'welcome_letter_date': datetime.date.today()})
+        </field>
+    </record>    
+    <!-- Action: Send Orientation Notice ////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_orientation_notice" model="ir.actions.server">
+        <field name="name">Send Orientation Notice</field>
+        <field name="model_id" ref="model_members_management_member"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.write({'application_state': 'orientation', 'orientation_notice_date': datetime.date.today()})
+        </field>
+    </record>  
+    <!-- Action: Send Bylaws ///////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_bylaws" model="ir.actions.server">
+        <field name="name">Send Bylaws</field>
+        <field name="model_id" ref="model_members_management_member"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.write({'application_state': 'bylaws', 'bylaws_sent_date': datetime.date.today()})
+        </field>
+    </record>             
+    <!-- Action: Quote Sent ////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_quote_sent" model="ir.actions.server">
+        <field name="name">Mark as Quote Sent</field>
+        <field name="model_id" ref="model_members_management_member"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.write({'application_state': 'quote_sent', 'quote_sent_date': datetime.date.today()})
+        </field>
+    </record>
+    <!-- Action: Quote Signed //////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_quote_signed" model="ir.actions.server">
+        <field name="name">Mark as Quote Signed</field>
+        <field name="model_id" ref="model_members_management_member"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.write({'application_state': 'quote_signed', 'quote_signed_date': datetime.date.today()})
+        </field>
+    </record>
+    <!-- Action: Subscription Initialized ///////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_sub_initialized" model="ir.actions.server">
+        <field name="name">Mark as Subscription Initialized</field>
+        <field name="model_id" ref="model_members_management_member"/>
+        <field name="state">code</field>
+        <field name="code">
+            for record in records:
+                record.write({'application_state': 'sub_initialized', 'sub_initialized_date': datetime.date.today()})
+        </field>
+    </record>   
+
+
+    <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Module Menus >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <!-- Root Menu item for Members Management -->
+    <menuitem id="menu_members_management_module_root" name="Members Management" sequence="10"/>
+
+    <!-- Root Menu item for Members Management -->
+    <menuitem id="menu_members_management_root" parent="menu_members_management_module_root" name="Members" sequence="20"/>
+    <!-- Menu item for Active Members -->
+    <menuitem id="menu_active_members_management" name="Active Members" parent="menu_members_management_root" action="action_view_active_members" sequence="21"/>
+    <!-- Menu item for Active Members -->
+    <menuitem id="menu_expiring_members_management" name="Expiring Members" parent="menu_members_management_root" action="action_view_expiring_members" sequence="22"/>
+    <!-- Menu item for Active Members -->
+    <menuitem id="menu_expired_members_management" name="Expired Members" parent="menu_members_management_root" action="action_view_expired_members" sequence="23"/>
+
+    <!-- Root Menu item for Applicants Management -->
+    <menuitem id="menu_applicants_management_root" parent="menu_members_management_module_root" name="Applicants" sequence="30"/>
+    <!-- Menu item for New Applicants -->
+    <menuitem id="menu_new_applicants" name="New Applicants" parent="menu_applicants_management_root" action="action_view_new_applicants" sequence="31"/>  
+    <!-- Menu item for Acknowledged Applicants -->
+    <menuitem id="menu_acknowledged_applicants" name="Receipt Acknowledged" parent="menu_applicants_management_root" action="action_view_acknowledged_applicants" sequence="32"/>
+    <!-- Menu item for Applicants sent Interview Notice -->
+    <menuitem id="menu_notice_of_interview_applicants" name="Sent Notice of Interview" parent="menu_applicants_management_root" action="action_view_notice_of_interview_applicants" sequence="33"/>
+    <!-- Menu item for Applicants sent Followup Letter -->
+    <menuitem id="menu_followup_letter_applicants" name="Sent Followup Letter" parent="menu_applicants_management_root" action="action_view_followup_letter_applicants" sequence="34"/>
+    <!-- Menu item for Applicants sent Welcome Letter -->
+    <menuitem id="menu_welcome_letter_applicants" name="Sent Welcome Letter" parent="menu_applicants_management_root" action="action_view_welcome_letter_applicants" sequence="35"/>
+    <!-- Menu item for Applicants sent Orientation Notice -->
+    <menuitem id="menu_orientation_notice_applicants" name="Sent Orientation Notice" parent="menu_applicants_management_root" action="action_view_orientation_notice_applicants" sequence="36"/>
+    <!-- Menu item for Applicants sent Orientation Notice -->
+    <menuitem id="menu_bylaws_applicants" name="Sent Bylaws" parent="menu_applicants_management_root" action="action_view_bylaws_applicants" sequence="36"/>  
 </odoo>

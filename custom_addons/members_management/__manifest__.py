@@ -10,7 +10,7 @@
             • Creation of tasks for staff to send new quotes. 
     """,
     'author': 'Cognizance Caribbean',
-    'depends': ['base'],
+    'depends': ['base', 'contacts', 'mail'],
     'data': [
         # 'security/security.xml',
         'security/ir.model.access.csv',
