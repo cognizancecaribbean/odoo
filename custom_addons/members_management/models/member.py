@@ -28,6 +28,10 @@ class Member(models.Model):
     
     # Application process tracking
     application_date = fields.Date(string='Application Date')
+    pdf_application_creation_date = fields.Date(string='PDF Application Creation Date')
+    signed_application_form = fields.Binary(string='Signed Application')
+    signed_application_form_filename = fields.Char(string='Application File Name')
+    signed_application_date = fields.Date(string='Signed Application Date')
     acknowledgment_date = fields.Date(string='Acknowledgment Date')
     interview_notice_date = fields.Date(string='Notice of Interview Date')
     interview_date = fields.Date(string='Interview Date')
@@ -96,10 +100,16 @@ class Member(models.Model):
     # Other Memberships
     other_memberships_ids = fields.One2many('members.management.other_membership', 'member_id', string='Other Memberships')
     
-    partner_id = fields.Many2one('res.partner', string='Related Partner')
+    proposer_id = fields.Many2one('members.management.member', string='Proposer', domain="[('status', '=', 'member'), ('id', '!=', id)]")
+    seconder_id = fields.Many2one('members.management.member', string='Seconder', domain="[('status', '=', 'member'), ('id', '!=', id)]")
+    
+    partner_id = fields.Many2one('res.partner', string='Contact')
     
     # Computed name field
     name = fields.Char(string='Name', compute='_compute_name', store=True)
+    
+    # Computed invoice ids field
+    invoice_ids = fields.One2many('account.move', compute='_compute_invoice_ids', string='Invoices')
     
 
     @api.depends('first_name', 'last_name')
@@ -110,9 +120,24 @@ class Member(models.Model):
     @api.model
     def create(self, vals):
         # Set the application date when a new record is created
-        vals['application_date'] = fields.Date.today()
+        vals['application_date'] = fields.Date.today()        
         # Call the super method to create the member
-        return super(Member, self).create(vals)            
+        member = super(Member, self).create(vals)        
+        # Create the partner for the new member
+        member.create_partner()        
+        return member      
+    
+    @api.model
+    def write(self, vals):
+        # Update the partner data if the member record is updated
+        res = super(Member, self).write(vals)
+        
+        # Update the partner if a partner_id is already set
+        for member in self:
+            if member.partner_id:
+                member.create_partner()  # Reuse the create_partner method to update the partner
+        
+        return res         
         
     @api.model
     def create_partner(self):
@@ -124,7 +149,6 @@ class Member(models.Model):
             'street2': self.street_address2,
             'city': self.city,
             'zip': self.zip,
-            'state_id': self.state_id.id,
             'country_id': self.country_id.id,
             'phone': self.home_number,
             'mobile': self.mobile_number,
@@ -132,8 +156,46 @@ class Member(models.Model):
             'is_company': False,  # Ensure the partner is set as a person
             'is_member': True,  # Custom field to mark as member
         }
-        partner = self.env['res.partner'].create(partner_vals)
-        self.partner_id = partner.id
+        if self.partner_id:
+            # Update existing partner
+            self.partner_id.write(partner_vals)
+        else:
+            # Create new partner
+            partner = self.env['res.partner'].create(partner_vals)
+            self.partner_id = partner.id
+        
+    def action_generate_invoice(self):
+        self.ensure_one()
+        
+        invoice = self.env['account.move'].create({
+            'move_type': 'out_invoice',
+            'partner_id': self.partner_id.id,
+            'invoice_origin': self.name,
+            # No initial invoice_line_ids, so the invoice starts empty
+        })
+        
+        # Open the invoice in form view to allow adding products/services
+        return {
+            'name': 'Customer Invoice',
+            'view_mode': 'form',
+            'res_model': 'account.move',
+            'view_id': self.env.ref('account.view_move_form').id,
+            'type': 'ir.actions.act_window',
+            'res_id': invoice.id,
+        }                  
+        
+    def action_generate_pdf_application_form(self):
+        # Update the pdf_application_generation_date field
+        self.write({
+            'pdf_application_creation_date': fields.Datetime.now()
+        })
+        # Generate the PDF application form
+        return self.env.ref('members_management.action_report_member_application').report_action(self)
+        
+    @api.depends('partner_id')
+    def _compute_invoice_ids(self):
+        for member in self:
+            member.invoice_ids = self.env['account.move'].search([('partner_id', '=', member.partner_id.id)])                       
 
     @api.model
     def accept_application(self):

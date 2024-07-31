@@ -10,12 +10,14 @@
             • Creation of tasks for staff to send new quotes. 
     """,
     'author': 'Cognizance Caribbean',
-    'depends': ['base', 'contacts', 'mail'],
+    'depends': ['base', 'contacts', 'mail', 'account'],
     'data': [
         # 'security/security.xml',
         'security/ir.model.access.csv',
         'views/members_management_views.xml',
-        # 'views/templates.xml',
+        'views/res_partner.xml',
+        'report/report_member_application_template.xml',
+        'report/report_action.xml',
         # 'data/data.xml',
     ],
     'installable': True,

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_report_member_application" model="ir.actions.report">
+        <field name="name">Member Application</field>
+        <field name="model">members.management.member</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">members_management.report_member_application_template</field>
+        <field name="report_file">members_management.report_member_application_template</field>
+        <field name="binding_model_id" ref="model_members_management_member"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

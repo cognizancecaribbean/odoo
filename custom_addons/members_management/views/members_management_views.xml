@@ -133,18 +133,21 @@
                             <page string="Application Process Log">
                                 <group>
                                     <group>
-                                        <field name="application_state"/>
-                                        <field name="application_date"/>
-                                        <field name="acknowledgment_date"/>
-                                        <field name="interview_notice_date"/>
-                                        <field name="interview_date"/>
+                                        <field name="application_state" readonly="1"/>                                    
+                                        <field name="application_date" readonly="1"/>
+                                        <field name="pdf_application_creation_date" readonly="1"/>
+                                        <field name="signed_application_form" widget="binary" readonly="1"/>
+                                        <field name="signed_application_form_filename" readonly="1"/>
+                                        <field name="acknowledgment_date" readonly="1"/>
+                                        <field name="interview_notice_date" readonly="1"/>
+                                        <field name="interview_date" readonly="1"/>
                                     </group>
                                     <group>
-                                        <field name="followup_date"/>
-                                        <field name="welcome_letter_date"/>
-                                        <field name="orientation_notice_date"/>
-                                        <field name="orientation_date"/>
-                                        <field name="bylaws_sent_date"/>
+                                        <field name="followup_date" readonly="1"/>
+                                        <field name="welcome_letter_date" readonly="1"/>
+                                        <field name="orientation_notice_date" readonly="1"/>
+                                        <field name="orientation_date" readonly="1"/>
+                                        <field name="bylaws_sent_date" readonly="1"/>
                                     </group>
                                 </group>
                             </page>
@@ -175,7 +178,7 @@
                 <field name="subscription_state"/>
             </tree>
         </field>
-    </record>
+    </record>   
     <!-- Action for Active Members //////////////////////////////////////////////////////////////////////////////////////////////////// -->
     <record id="action_view_active_members" model="ir.actions.act_window">
         <field name="name">Active Members</field>
@@ -212,6 +215,10 @@
             <form string="Applicant">
                 <div class="o_form_sheet_bg">
                     <header>
+                        <!-- Button: Generate PDF Application Form -->
+                         <button name="action_generate_pdf_application_form" type="object" string="Generate PDF Form" class="oe_highlight"/>
+                        <!-- Button: Create Invoice -->
+                        <button name="action_generate_invoice" string="Create Invoice" type="object" class="oe_highlight" invisible="application_state != 'new'"/>
                         <!-- Button: Acknowledge Application -->
                         <button name="%(action_acknowledge_application)d" type="action" string="Acknowledge Application" class="oe_highlight" invisible="application_state != 'new'"/>
                         <!-- Button: Send Notice of Interview -->
@@ -277,8 +284,24 @@
                                 <field name="membership_type"/>
                             </group>
                             <group>
-                                <field name="status"/>
-                                <field name="member_since"/>
+                                <field name="status" readonly="1"/>
+                            </group>
+                        </group>
+
+                        <!-- Partner Information Group -->
+                        <group string="Related Contact">
+                            <group>
+                                <field name="partner_id" readonly="1"/>
+                            </group>
+                        </group>                        
+
+                        <!-- Proposer & Seconder Group -->
+                        <group string="Proposer and Seconder">
+                            <group>
+                                <field name="proposer_id" string="Proposer" options="{'no_create': True}"/>
+                            </group>
+                            <group>
+                                <field name="seconder_id" string="Seconder" options="{'no_create': True}"/>
                             </group>
                         </group>
 
@@ -289,11 +312,15 @@
                                     <group>
                                         <field name="application_state" readonly="1"/>
                                         <field name="application_date" readonly="1"/>
+                                        <field name="pdf_application_creation_date" readonly="1"/>
+                                        <field name="signed_application_form" widget="binary"/>
+                                        <field name="signed_application_form_filename"/>
+                                        <field name="signed_application_date" readonly="1"/>
                                         <field name="acknowledgment_date" readonly="1"/>
-                                        <field name="interview_notice_date" readonly="1"/>
-                                        <field name="interview_date" readonly="1"/>
                                     </group>
                                     <group>
+                                        <field name="interview_notice_date" readonly="1"/>
+                                        <field name="interview_date" readonly="1"/>                                    
                                         <field name="followup_date" readonly="1"/>
                                         <field name="welcome_letter_date" readonly="1"/>
                                         <field name="orientation_notice_date" readonly="1"/>
@@ -301,7 +328,19 @@
                                         <field name="bylaws_sent_date" readonly="1"/>
                                     </group>
                                 </group>
-                            </page>                        
+                            </page>  
+                            <!-- Invoices Tab -->
+                            <page string="Invoices">
+                                <field name="partner_id" invisible="1"/>
+                                <field name="invoice_ids">
+                                    <tree string="Invoice" create="true" edit="true">
+                                        <field name="name"/>
+                                        <field name="invoice_date"/>
+                                        <field name="amount_total"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </page>                                                                           
                             <!-- Children Tab -->
                             <page string="Children">
                                 <field name="children_ids">
@@ -396,6 +435,9 @@
             </tree>
         </field>
     </record>
+
+     <!-- Window Actions -->
+
     <!-- Action for New Applicants /////////////////////////////////////////////////////////////////////////////////////////////////////// -->
     <record id="action_view_new_applicants" model="ir.actions.act_window">
         <field name="name">New Applicants</field>
@@ -452,6 +494,8 @@
         <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_applicant_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_applicant_form')})]"/>
         <field name="domain">[('status', '=', 'applicant'), ('application_state', '=', 'bylaws')]</field>
     </record>   
+
+    <!-- Server Actions -->
 
     <!-- Action: Acknowledge Application ////////////////////////////////////////////////////////////////////////////////////////////////// -->
     <record id="action_acknowledge_application" model="ir.actions.server">
@@ -542,7 +586,7 @@
             for record in records:
                 record.write({'application_state': 'sub_initialized', 'sub_initialized_date': datetime.date.today()})
         </field>
-    </record>   
+    </record>  
 
 
     <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Module Menus >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->

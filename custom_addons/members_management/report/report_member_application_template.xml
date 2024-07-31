@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_member_application_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                <main>
+                    <div class="page">
+                        <h1 class="mb-6">Membership Application Form</h1>
+                        <!-- Applicant Information -->
+                        <h2>Applicant Information</h2>
+                        <table class="table table-condensed">
+                            <tr>
+                                <th>First Name</th>
+                                <td t-esc="doc.first_name"/>
+                            </tr>
+                            <tr>
+                                <th>Last Name</th>
+                                <td t-esc="doc.last_name"/>
+                            </tr>
+                            <!-- Add other fields similarly -->
+                        </table>
+                        <!-- Proposer and Seconder Information -->
+                        <h2>Proposer and Seconder</h2>
+                        <table class="table table-condensed">
+                            <tr>
+                                <th>Proposer</th>
+                                <td t-esc="doc.proposer_id.name"/>
+                            </tr>
+                            <tr>
+                                <th>Seconder</th>
+                                <td t-esc="doc.seconder_id.name"/>
+                            </tr>
+                        </table>
+                        <!-- Signatures -->
+                        <p>Signatures</p>
+                        <table class="table table-condensed">
+                            <tr>
+                                <th>Proposer Signature</th>
+                                <td>__________________________</td>
+                            </tr>
+                            <tr>
+                                <th>Seconder Signature</th>
+                                <td>__________________________</td>
+                            </tr>
+                            <tr>
+                                <th>Applicant Signature</th>
+                                <td>__________________________</td>
+                            </tr>
+                        </table>
+                    </div>        
+                </main>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
