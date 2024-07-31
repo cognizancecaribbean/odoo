@@ -4,7 +4,7 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='comment']" position="before">
+            <xpath expr="//field[@name='function']" position="before">
                 <field name="is_member"/>
             </xpath>
         </field>
