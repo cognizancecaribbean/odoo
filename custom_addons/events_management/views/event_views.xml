@@ -1,0 +1,157 @@
+<odoo>
+    <!-- Event Form View -->
+    <record id="view_event_form" model="ir.ui.view">
+        <field name="name">event.event.form</field>
+        <field name="model">event.event</field>
+        <field name="arch" type="xml">
+            <form string="Event">
+              <div class="o_form_sheet_bg">
+                <header>
+                    <button name="create_invoice" type="object" string="Create Invoice" class="btn-primary" invisible="is_organizer_current_company"/>
+                </header>
+                  <sheet>
+                      <group string="Basic Information">
+                        <group>
+                          <field name="name"/>
+                          <field name="start_date"/>
+                          <field name="end_date"/>
+                          <field name="all_day"/>
+                          <field name="space_id"/>
+                          <field name="organizer_id"/>
+                          <field name="status"/>
+                        </group>
+                        <group>
+                          <field name="is_organizer_current_company"/>
+                          <field name="is_private"/>
+                          <field name="event_type"/>
+                          <field name="event_type_details"/>
+                          <field name="num_guests"/>
+                        </group>
+                      </group>
+                      <group>
+                        <group string="If Private Event">
+                          <field name="private_charge"/>                          
+                        </group>
+                        <group string="If Commercial Event">
+                          <field name="commercial_charge"/>
+                          <field name="commercial_charge_details"/>
+                        </group>
+                        <group string="If Charity Event">
+                          <field name="charity_charge"/>
+                          <field name="charity_name"/>
+                          <field name="charity_percentage"/>
+                          <field name="charity_confirmation"/>
+                        </group>                        
+                      </group>
+                      <group string="Event Options">
+                      <group>
+                        <field name="tables_required"/>
+                        <field name="chairs_required"/>
+                        <field name="tents_required"/>
+                        <field name="share_facilities"/>
+                        <field name="bar_service"/>
+                      </group>
+                      <group>
+                        <field name="food_service"/>
+                        <field name="entertainment_type"/>
+                        <field name="entertainment_details"/>
+                        <field name="stage_platform"/>
+                        <field name="marine_activities"/>
+                      </group>                                                                        
+                    </group>
+                  </sheet>
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids"/>
+                </div>
+              </div>
+            </form>
+        </field>
+    </record>
+    <!-- Event Kanban View -->
+    <record id="view_event_kanban" model="ir.ui.view">
+        <field name="name">event.event.kanban</field>
+        <field name="model">event.event</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="organizer_id"/>
+                <field name="status"/>
+                <templates>
+                    <t t-name="kanban-box" style="padding: 5px; margin: 5px;">
+                        <div class="o_kanban_record" style="display: flex; align-items: center; padding: 0px;">
+                            <div class="o_kanban_image" style="margin: 0px; padding: 0px">
+                                <t t-if="record.organizer_id.raw_value">
+                                    <t t-set="organizer_id" t-value="record.organizer_id.raw_value"/>
+                                    <img t-att-src="kanban_image('res.partner', 'image_128', organizer_id)"
+                                        t-att-alt="record.organizer_id.value" class="img img-fluid" 
+                                        style="width: 100%;"/>
+                                </t>
+                                <t t-else="">
+                                    <p>No Organizer Image</p>
+                                </t>
+                            </div>
+                            <div class="o_kanban_details" style="padding-left: 10px;">
+                                <strong>
+                                    <a t-attf-href="/web#model=event.event&amp;id=#{record.id.raw_value}">
+                                        <t t-esc="record.name.value"/>
+                                    </a>
+                                </strong>
+                                <div>
+                                    <small><t t-esc="record.start_date.value"/></small>
+                                </div>
+                                <div>
+                                    <small><t t-esc="record.end_date.value"/></small>
+                                </div>
+                                <div>
+                                    <t t-esc="record.organizer_id.value"/>
+                                </div>
+                                <div>
+                                    <t t-esc="record.status.value"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+                <group_by>
+                    <field name="status"/>
+                </group_by>
+            </kanban>
+        </field>
+    </record>
+    <!-- Event Tree View -->
+    <record id="view_event_tree" model="ir.ui.view">
+        <field name="name">event.event.tree</field>
+        <field name="model">event.event</field>
+        <field name="arch" type="xml">
+            <tree string="Events">
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="all_day"/>
+                <field name="space_id"/>
+                <field name="organizer_id"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Event Calendar -->
+    <record id="view_event_event_calendar" model="ir.ui.view">
+        <field name="name">event.event.calendar</field>
+        <field name="model">event.event</field>
+        <field name="arch" type="xml">
+            <calendar string="Events" date_start="start_date" date_stop="end_date" all_day="all_day" mode="month" event_open_popup="true" color="space_id">
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="all_day"/>
+                <field name="space_id"/>
+                <field name="status"/>
+            </calendar>
+        </field>
+    </record>    
+</odoo>

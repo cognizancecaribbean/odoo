@@ -1,0 +1,97 @@
+<odoo>
+    <!-- Events Calendar Action -->
+    <record id="action_event_event_calendar" model="ir.actions.act_window">
+        <field name="name">Events</field>
+        <field name="res_model">event.event</field>
+        <field name="view_mode">calendar,tree,kanban,form</field>
+        <field name="view_id" ref="view_event_event_calendar"/>
+    </record>
+
+    <!-- Event Space Tree View -->
+    <record id="view_event_space_tree" model="ir.ui.view">
+        <field name="name">event.space.tree</field>
+        <field name="model">event.space</field>
+        <field name="arch" type="xml">
+            <tree string="Event Spaces">
+                <field name="name"/>
+                <field name="location"/>
+                <field name="capacity"/>
+                <field name="price_per_hour"/>
+                <field name="is_available"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Event Space Kanban View -->
+    <record id="view_event_space_kanban" model="ir.ui.view">
+        <field name="name">event.space.kanban</field>
+        <field name="model">event.space</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="capacity"/>
+                <field name="pending_events_count"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_record" style="display: flex; flex-direction: column; padding: 0px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); border-radius: 5px;">
+                            <div class="o_kanban_image" style="flex-shrink: 1; text-align: center; padding: 0px;">
+                                <a t-attf-href="/web#model=event.space&amp;id=#{record.id.raw_value}">
+                                    <img t-att-src="kanban_image('event.space', 'image', record.id.raw_value)" t-att-alt="record.name.value" class="img img-fluid" style="max-width: 100%;"/>
+                                </a>                                
+                            </div>
+                            <div class="o_kanban_details" style="flex-grow: 1; display: flex; flex-direction: column;">
+                                <strong style="margin-bottom: 5px;">
+                                    <a t-attf-href="/web#model=event.space&amp;id=#{record.id.raw_value}">
+                                        <t t-esc="record.name.value"/>
+                                    </a>
+                                </strong>
+                                <div style="margin-bottom: 5px;">
+                                    <t t-esc="record.capacity.value"/> Capacity
+                                </div>
+                                <div>
+                                    <t t-esc="record.pending_events_count.value"/> Pending Events
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Event Space Form -->
+    <record id="view_event_space_form" model="ir.ui.view">
+        <field name="name">event.space.form</field>
+        <field name="model">event.space</field>
+        <field name="arch" type="xml">
+            <form string="Event Space">
+                <div class="o_form_sheet_bg">
+                    <header>
+                    <!-- Add other buttons here -->
+                        <button name="%(action_event_pending)d" type="action" string="View Calendar" class="oe_stat_button" icon="fa-calendar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="location"/>
+                                <field name="capacity"/>
+                                <field name="description"/>
+                                <field name="image" widget="image"/>
+                            </group>
+                            <group>
+                                <field name="amenities" widget="many2many_tags"/>
+                                <field name="price_per_hour"/>
+                                <field name="is_available"/>
+                            </group>                    
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids"/>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>    
+</odoo>

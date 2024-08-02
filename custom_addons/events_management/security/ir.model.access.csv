@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_events_management_events_management,events_management.events_management,model_events_management_events_management,base.group_user,1,1,1,1
+access_event_space,event.space,model_event_space,,1,1,1,1
+access_event_space_amenity,event.space.amenity,model_event_space_amenity,,1,1,1,1
+access_event_event,event.event,model_event_event,,1,1,1,1

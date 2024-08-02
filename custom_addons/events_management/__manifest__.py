@@ -1,34 +1,26 @@
-# -*- coding: utf-8 -*-
 {
-    'name': "events_management",
-
-    'summary': "Short (1 phrase/line) summary of the module's purpose",
-
+    'name': 'Events Management',
+    'version': '1.0',
+    'summary': 'Manage events, spaces, space booking with invoicing',
     'description': """
-Long description of module's purpose
+        A comprehensive events management module to manage data for evens, event spaces, space bookings and invoicing customers.
+            • Event creation and approval
+            • Automated notifications and reminders
+            • Booking request and approval process 
+            • Invoicing for booked spaces via  Odoo’s Invoicing app.
+            • Space availability checking and booking management 
+            • Automated notifications for booking confirmations and reminders
+            • Create and print rental agreement / application form 
     """,
-
-    'author': "My Company",
-    'website': "https://www.yourcompany.com",
-
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
-    'category': 'Uncategorized',
-    'version': '0.1',
-
-    # any module necessary for this one to work correctly
-    'depends': ['base'],
-
-    # always loaded
+    'author': 'Cognizance Caribbean',
+    'depends': ['base', 'mail', 'sale_management'],
     'data': [
-        # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        'security/ir.model.access.csv',
+        'views/space_amenity_views.xml',
+        'views/event_views.xml',
+        'views/event_space_views.xml',
+        'views/menus.xml',
     ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
+    'installable': True,
+    'application': True,
 }
-
