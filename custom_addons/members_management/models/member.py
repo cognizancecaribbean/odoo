@@ -95,7 +95,7 @@ class Member(models.Model):
     member_since = fields.Date(string='Member Since')
 
     # Boat Data
-    boat_ids = fields.One2many('members.management.boat', 'member_id', string='Boats')
+    boat_ids = fields.Many2many('members.management.boat', 'member_boat_rel', 'member_id', 'boat_id', string='Boats')
 
     # Other Memberships
     other_memberships_ids = fields.One2many('members.management.other_membership', 'member_id', string='Other Memberships')

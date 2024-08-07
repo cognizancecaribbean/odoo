@@ -144,7 +144,7 @@
         <field name="name">event.event.calendar</field>
         <field name="model">event.event</field>
         <field name="arch" type="xml">
-            <calendar string="Events" date_start="start_date" date_stop="end_date" all_day="all_day" mode="month" event_open_popup="true" color="space_id">
+            <calendar string="Events" date_start="start_date" date_stop="end_date" all_day="all_day" mode="month" event_open_popup="false" color="space_id">
                 <field name="name"/>
                 <field name="start_date"/>
                 <field name="end_date"/>

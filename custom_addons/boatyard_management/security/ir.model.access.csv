@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_boat_specification,access_boat_specification,model_boatyard_boat_specification,,1,1,1,1
+access_boat_document,access_boat_document,model_boatyard_boat_document,,1,1,1,1
+access_boat_engine,access_boat_engine,model_boatyard_boat_engine,,1,1,1,1
+access_boat_device,access_boat_device,model_boatyard_boat_device,,1,1,1,1
+access_boat_space,access_boat_space,model_boatyard_boat_space,,1,1,1,1
+access_boat_space_booking,access_boat_space_booking,model_boatyard_boat_space_booking,,1,1,1,1
+access_boat_movement,access_boat_movement,model_boatyard_boat_movement,,1,1,1,1

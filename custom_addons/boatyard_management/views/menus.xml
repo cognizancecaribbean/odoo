@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Root Menu -->
+    <menuitem id="menu_boatyard_management" name="Boatyard Management" sequence="10"/>
+
+    <!-- Menu Item for Boat Space -->
+    <menuitem id="menu_boat_space" name="Boat Spaces" parent="menu_boatyard_management" action="action_boat_space" sequence="20"/>
+
+    <!-- Menu Item for BoatSpecification -->
+    <menuitem id="menu_boat_specification" name="Boat Specifications" parent="menu_boatyard_management" action="action_boatyard_boat_specification" sequence="30"/>
+
+</odoo>

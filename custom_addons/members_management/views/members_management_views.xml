@@ -109,6 +109,7 @@
                                             <field name="name"/>
                                             <field name="size"/>
                                             <field name="engine"/>
+                                            <field name="partner_ids"/>
                                         </group>
                                     </form>
                                 </field>
@@ -382,12 +383,14 @@
                                         <field name="name"/>
                                         <field name="size"/>
                                         <field name="engine"/>
+                                        <field name="partner_ids" invisible="1"/>
                                     </tree>
                                     <form>
                                         <group>
                                             <field name="name"/>
                                             <field name="size"/>
                                             <field name="engine"/>
+                                            <field name="partner_ids"/>
                                         </group>
                                     </form>
                                 </field>
