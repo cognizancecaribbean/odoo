@@ -87,7 +87,7 @@
     <record id="action_boat_space" model="ir.actions.act_window">
         <field name="name">Boat Spaces</field>
         <field name="res_model">boatyard.boat.space</field>
-        <field name="view_mode">kanbantree,form</field>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
 
 

@@ -117,12 +117,12 @@ class BoatSpaceBooking(models.Model):
         ('done', 'Done')
     ], string='Status', default='draft')
     
-    def name_get(self):
-        result = []
+    name = fields.Char(string='Booking Name', compute='_compute_name', store=True)
+
+    @api.depends('boat_id', 'space_id')
+    def _compute_name(self):
         for record in self:
-            name = record.boat_id.name
-            result.append((record.id, name))
-        return result    
+            record.name = f'Booking for {record.boat_id.name}' if record.boat_id else 'Booking'    
     
 
 
