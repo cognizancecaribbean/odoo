@@ -1,37 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Kanban View for Boat Space -->
-    <record id="view_boat_space_kanban" model="ir.ui.view">
-        <field name="name">boatyard.boat.space.kanban</field>
-        <field name="model">boatyard.boat.space</field>
-        <field name="arch" type="xml">
-            <kanban>
-                <field name="name"/>
-                <field name="length"/>
-                <field name="width"/>
-                <field name="height"/>
-                <field name="space_type"/>
-                <templates>
-                    <t t-name="kanban-box">
-                        <div class="o_kanban_record">
-                            <div class="o_kanban_details">
-                                <strong>
-                                    <field name="name"/>
-                                </strong>
-                                <div><strong>Length:</strong> <field name="length"/> m</div>
-                                <div><strong>Width:</strong> <field name="width"/> m</div>
-                                <div><strong>Height:</strong> <field name="height"/> m</div>
-                                <div><strong>Type:</strong> <field name="space_type"/></div>
-                                <div><strong>Available:</strong> <field name="is_available"/></div>
-                                <button name="%(action_view_boat_space_booking_calendar)d" type="action" class="btn btn-primary mt16" t-attf-data-space-id="#{record.id.raw_value}" t-att-data-context="{'default_space_id': record.id.raw_value}">
-                                    View Bookings
-                                </button>                               
-                            </div>
-                        </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
+    <!-- Action for Boat Space -->
+    <record id="action_boat_space" model="ir.actions.act_window">
+        <field name="name">Boat Spaces</field>
+        <field name="res_model">boatyard.boat.space</field>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <!-- Tree View for Boat Space -->
@@ -82,27 +55,39 @@
             </form>
         </field>
     </record>
+ 
 
-    <!-- Action for Boat Space -->
-    <record id="action_boat_space" model="ir.actions.act_window">
-        <field name="name">Boat Spaces</field>
-        <field name="res_model">boatyard.boat.space</field>
-        <field name="view_mode">kanban,tree,form</field>
-    </record>
-
-
-    <!-- Boat Space Booking -->
-    <record id="view_boat_space_booking_calendar" model="ir.ui.view">
-        <field name="name">boatyard.boat.space.booking.calendar</field>
-        <field name="model">boatyard.boat.space.booking</field>
+    <!-- Kanban View for Boat Space -->
+    <record id="view_boat_space_kanban" model="ir.ui.view">
+        <field name="name">boatyard.boat.space.kanban</field>
+        <field name="model">boatyard.boat.space</field>
         <field name="arch" type="xml">
-            <calendar string="Boat Space Bookings" date_start="start_date" date_stop="end_date" mode="month" event_open_popup="true" color="space_id">
-                <field name="boat_id"/>
-                <field name="start_date"/>
-                <field name="end_date"/>
-                <field name="space_id"/>
-                <field name="status"/>
-            </calendar>
+            <kanban>
+                <field name="name"/>
+                <field name="length"/>
+                <field name="width"/>
+                <field name="height"/>
+                <field name="space_type"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_record">
+                            <div class="o_kanban_details">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <div><strong>Length:</strong> <field name="length"/> m</div>
+                                <div><strong>Width:</strong> <field name="width"/> m</div>
+                                <div><strong>Height:</strong> <field name="height"/> m</div>
+                                <div><strong>Type:</strong> <field name="space_type"/></div>
+                                <div><strong>Available:</strong> <field name="is_available"/></div>
+                                <button name="%(action_view_boat_space_booking_calendar)d" type="action" class="btn btn-primary mt16" t-attf-data-space-id="#{record.id.raw_value}" t-att-data-context="{'default_space_id': record.id.raw_value}">
+                                    View Bookings
+                                </button>                               
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 
@@ -150,13 +135,5 @@
             </form>
         </field>
     </record>    
-
-    <!-- Boat Space Booking Calendar Action -->
-    <record id="action_view_boat_space_booking_calendar" model="ir.actions.act_window">
-        <field name="name">Boat Space Bookings</field>
-        <field name="res_model">boatyard.boat.space.booking</field>
-        <field name="view_mode">tree,form,calendar</field>
-        <field name="view_id" ref="view_boat_space_booking_calendar"/>
-        <field name="context">{'form_view_ref': 'boatyard_management.view_boat_space_booking_form', 'default_space_id': active_id}</field>
-    </record>    
+   
 </odoo>

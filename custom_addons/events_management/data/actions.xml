@@ -1,0 +1,24 @@
+<odoo>
+    <!-- Event Space Action -->
+    <record id="action_event_space_amenity" model="ir.actions.act_window">
+        <field name="name">Event Space Amenities</field>
+        <field name="res_model">event.space.amenity</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Event Space Action -->    
+    <record id="action_event_space" model="ir.actions.act_window">
+        <field name="name">Event Spaces</field>
+        <field name="res_model">event.space</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <!-- Events Pending Action -->
+    <record id="action_event_pending" model="ir.actions.act_window">
+        <field name="name">Pending Events</field>
+        <field name="res_model">event.event</field>
+        <field name="view_mode">calendar,tree</field>
+        <field name="context">{'default_space_id': active_id}</field>
+        <field name="domain">[('space_id', '=', context.get('default_space_id'))]</field>
+    </record> 
+</odoo>

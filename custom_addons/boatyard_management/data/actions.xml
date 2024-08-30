@@ -1,0 +1,25 @@
+<odoo>
+    <!-- Boat Space Booking -->
+    <record id="view_boat_space_booking_calendar" model="ir.ui.view">
+        <field name="name">boatyard.boat.space.booking.calendar</field>
+        <field name="model">boatyard.boat.space.booking</field>
+        <field name="arch" type="xml">
+            <calendar string="Boat Space Bookings" date_start="start_date" date_stop="end_date" mode="month" event_open_popup="true" color="space_id">
+                <field name="boat_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="space_id"/>
+                <field name="status"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Boat Space Booking Calendar Action -->
+    <record id="action_view_boat_space_booking_calendar" model="ir.actions.act_window">
+        <field name="name">Boat Space Bookings</field>
+        <field name="res_model">boatyard.boat.space.booking</field>
+        <field name="view_mode">tree,form,calendar</field>
+        <field name="view_id" ref="view_boat_space_booking_calendar"/>
+        <field name="context">{'form_view_ref': 'boatyard_management.view_boat_space_booking_form', 'default_space_id': active_id}</field>
+    </record>
+</odoo>

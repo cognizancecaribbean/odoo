@@ -34,7 +34,7 @@ class EventSpace(models.Model):
     def _compute_next_event_date(self):
         for space in self:
             if space.event_ids:
-                space.next_event_date = min(space.event_ids.mapped('date'))
+                space.next_event_date = min(space.event_ids.mapped('start_date'))
             else:
                 space.next_event_date = False
     

@@ -13,12 +13,12 @@
     'depends': ['base', 'contacts', 'mail', 'account'],
     'data': [
         # 'security/security.xml',
+        'data/actions.xml',
         'security/ir.model.access.csv',
         'views/members_management_views.xml',
         'views/res_partner.xml',
         'report/report_member_application_template.xml',
         'report/report_action.xml',
-        # 'data/data.xml',
     ],
     'installable': True,
     'application': True,

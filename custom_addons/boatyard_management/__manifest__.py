@@ -15,6 +15,7 @@
     'author': 'Cognizance Caribbean',
     'depends': ['base', 'mail', 'sale_management', 'web'],
     'data': [
+        'data/actions.xml',
         'security/ir.model.access.csv',
         'views/boatyard_views.xml',
         'views/boat_specification_views.xml',
