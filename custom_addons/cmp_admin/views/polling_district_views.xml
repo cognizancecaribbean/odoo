@@ -1,0 +1,33 @@
+<odoo>
+  <data>
+
+    <!-- Tree View for Polling District -->
+    <record id="view_polling_district_tree" model="ir.ui.view">
+        <field name="name">polling.district.tree</field>
+        <field name="model">polling.district</field>
+        <field name="arch" type="xml">
+            <tree string="Polling Districts">
+                <field name="pd_number"/>
+                <field name="ped_id"/>
+                <field name="ed_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Polling District -->
+    <record id="view_polling_district_form" model="ir.ui.view">
+        <field name="name">polling.district.form</field>
+        <field name="model">polling.district</field>
+        <field name="arch" type="xml">
+            <form string="Polling District">
+                <group>
+                    <field name="pd_number"/>
+                    <field name="ped_id"/>
+                    <field name="ed_id"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+  </data>
+</odoo>

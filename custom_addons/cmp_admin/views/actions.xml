@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+    
+    <record id="action_polling_district" model="ir.actions.act_window">
+        <field name="name">Polling Districts</field>
+        <field name="res_model">polling.district</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_polling_district_tree"/>
+    </record>
+
+    <record id="action_ped" model="ir.actions.act_window">
+        <field name="name">Parliamentary Electoral Districts</field>
+        <field name="res_model">parliamentary.electoral.district</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_ped_tree"/>
+    </record>
+
+    <record id="action_ed" model="ir.actions.act_window">
+        <field name="name">Electoral Districts</field>
+        <field name="res_model">electoral.district</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_ed_tree"/>
+    </record>
+
+    <record id="action_regional_corporation" model="ir.actions.act_window">
+        <field name="name">Regional Corporations</field>
+        <field name="res_model">regional.corporation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_regional_corporation_tree"/>
+    </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+
+        <!-- Tree View for Regional Corporation -->
+        <record id="view_regional_corporation_tree" model="ir.ui.view">
+            <field name="name">regional.corporation.tree</field>
+            <field name="model">regional.corporation</field>
+            <field name="arch" type="xml">
+                <tree string="Regional Corporations">
+                    <field name="corporation_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View for Regional Corporation -->
+        <record id="view_regional_corporation_form" model="ir.ui.view">
+            <field name="name">regional.corporation.form</field>
+            <field name="model">regional.corporation</field>
+            <field name="arch" type="xml">
+                <form string="Regional Corporation">
+                    <group>
+                        <field name="corporation_name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

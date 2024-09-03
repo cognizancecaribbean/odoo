@@ -1,3 +1,4 @@
-# -*- coding: utf-8 -*-
-
-from . import models
+from . import citizen
+from . import voter
+from . import election
+from . import address

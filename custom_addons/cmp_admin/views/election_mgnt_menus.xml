@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+    
+        <menuitem id="menu_cmp_administration" name="CMP Administration" sequence="10"/>
+
+        <!-- Manage Districts Drop Down Menu -->
+        <menuitem id="menu_cmp_manage_districts" name="Manage Districts" parent="menu_cmp_administration" sequence="20"/>
+        <menuitem id="menu_polling_district" name="Polling Districts" parent="menu_cmp_manage_districts" sequence="21" action="action_polling_district"/>
+        <menuitem id="menu_ped" name="Parliamentary Electoral Districts" parent="menu_cmp_manage_districts" sequence="22" action="action_ped"/>
+        <menuitem id="menu_ed" name="Electoral Districts" parent="menu_cmp_manage_districts" sequence="23" action="action_ed"/>
+        <menuitem id="menu_regional_corporation" name="Regional Corporations" parent="menu_cmp_manage_districts" sequence="24" action="action_regional_corporation"/>
+
+    </data>
+</odoo>

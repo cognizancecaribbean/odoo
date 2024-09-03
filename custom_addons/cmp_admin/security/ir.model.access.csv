@@ -1,2 +1,11 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_cmp_admin_cmp_admin,cmp_admin.cmp_admin,model_cmp_admin_cmp_admin,base.group_user,1,1,1,1
+access_polling_district_cmp_admin,access.polling.district.cmp.admin,model_polling_district,group_cmp_admin,1,1,1,1
+access_ped_cmp_admin,access.ped.cmp.admin,model_parliamentary_electoral_district,group_cmp_admin,1,1,1,1
+access_ed_cmp_admin,access.ed.cmp.admin,model_electoral_district,group_cmp_admin,1,1,1,1
+access_regional_corporation_cmp_admin,access.regional.corporation.cmp.admin,model_regional_corporation,group_cmp_admin,1,1,1,1
+access_street_cmp_admin,access.street.cmp.admin,model_street,group_cmp_admin,1,1,1,1
+access_address_cmp_admin,access.address.cmp.admin,model_address,group_cmp_admin,1,1,1,1
+access_citizen_cmp_admin,access.citizen.cmp.admin,model_citizen,group_cmp_admin,1,1,1,1
+access_election_cmp_admin,access.election.cmp.admin,model_election,group_cmp_admin,1,1,1,1
+access_voter_cmp_admin,access.voter.cmp.admin,model_voter,group_cmp_admin,1,1,1,1
+

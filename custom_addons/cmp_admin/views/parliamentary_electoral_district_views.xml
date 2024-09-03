@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+
+        <!-- Tree View for Parliamentary Electoral District -->
+        <record id="view_ped_tree" model="ir.ui.view">
+            <field name="name">parliamentary.electoral.district.tree</field>
+            <field name="model">parliamentary.electoral.district</field>
+            <field name="arch" type="xml">
+                <tree string="Parliamentary Electoral Districts">
+                    <field name="ped_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View for Parliamentary Electoral District -->
+        <record id="view_ped_form" model="ir.ui.view">
+            <field name="name">parliamentary.electoral.district.form</field>
+            <field name="model">parliamentary.electoral.district</field>
+            <field name="arch" type="xml">
+                <form string="Parliamentary Electoral District">
+                    <group>
+                        <field name="ped_name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

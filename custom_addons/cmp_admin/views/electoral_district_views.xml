@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+
+        <!-- Tree View for Electoral District -->
+        <record id="view_ed_tree" model="ir.ui.view">
+            <field name="name">electoral.district.tree</field>
+            <field name="model">electoral.district</field>
+            <field name="arch" type="xml">
+                <tree string="Electoral Districts">
+                    <field name="ed_name"/>
+                    <field name="corporation_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View for Electoral District -->
+        <record id="view_ed_form" model="ir.ui.view">
+            <field name="name">electoral.district.form</field>
+            <field name="model">electoral.district</field>
+            <field name="arch" type="xml">
+                <form string="Electoral District">
+                    <group>
+                        <field name="ed_name"/>
+                        <field name="corporation_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
