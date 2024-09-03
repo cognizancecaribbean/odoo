@@ -4,7 +4,7 @@ class Election(models.Model):
     _name = 'election'
     _description = 'Election'
 
-    title = fields.Char(string="Election Title", required=True)
-    year = fields.Integer(string="Election Year", required=True)
-    election_type = fields.Selection([('general', 'General'), ('local', 'Local')], string="Election Type")
+    name = fields.Char(string="Election Title", required=True)
+    election_type = fields.Selection([('general', 'General'), ('local', 'Local'), {'tha', 'THA'}], string="Election Type")
     voter_ids = fields.One2many('voter', 'election_id', string="Voters")
+    election_date = fields.Date(string="Election Date", required=True)
