@@ -180,6 +180,15 @@
             </tree>
         </field>
     </record>   
+
+    <!-- Action for All Members //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_view_all_members" model="ir.actions.act_window">
+        <field name="name">All Members</field>
+        <field name="res_model">members.management.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_members_management_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_members_management_form')})]"/>
+        <field name="domain">[('status', '=', 'member')]</field>
+    </record>
     <!-- Action for Active Members //////////////////////////////////////////////////////////////////////////////////////////////////// -->
     <record id="action_view_active_members" model="ir.actions.act_window">
         <field name="name">Active Members</field>
@@ -441,6 +450,14 @@
 
      <!-- Window Actions -->
 
+    <!-- Action for All Applicants /////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <record id="action_view_all_applicants" model="ir.actions.act_window">
+        <field name="name">All Applicants</field>
+        <field name="res_model">members.management.member</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_applicant_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_applicant_form')})]"/>
+        <field name="domain">[('status', '=', 'applicant')]</field>
+    </record>
     <!-- Action for New Applicants /////////////////////////////////////////////////////////////////////////////////////////////////////// -->
     <record id="action_view_new_applicants" model="ir.actions.act_window">
         <field name="name">New Applicants</field>
@@ -511,29 +528,33 @@
 
     <!-- Root Menu item for Members Management -->
     <menuitem id="menu_members_management_root" parent="menu_members_management_module_root" name="Members" sequence="20"/>
+    <!-- Menu item for All Members -->
+    <menuitem id="menu_all_members_management" name="All Members" parent="menu_members_management_root" action="action_view_all_members" sequence="21"/>
     <!-- Menu item for Active Members -->
-    <menuitem id="menu_active_members_management" name="Active Members" parent="menu_members_management_root" action="action_view_active_members" sequence="21"/>
+    <menuitem id="menu_active_members_management" name="Active Members" parent="menu_members_management_root" action="action_view_active_members" sequence="22"/>
     <!-- Menu item for Active Members -->
-    <menuitem id="menu_expiring_members_management" name="Expiring Members" parent="menu_members_management_root" action="action_view_expiring_members" sequence="22"/>
+    <menuitem id="menu_expiring_members_management" name="Expiring Members" parent="menu_members_management_root" action="action_view_expiring_members" sequence="23"/>
     <!-- Menu item for Active Members -->
-    <menuitem id="menu_expired_members_management" name="Expired Members" parent="menu_members_management_root" action="action_view_expired_members" sequence="23"/>
+    <menuitem id="menu_expired_members_management" name="Expired Members" parent="menu_members_management_root" action="action_view_expired_members" sequence="24"/>
 
     <!-- Root Menu item for Applicants Management -->
     <menuitem id="menu_applicants_management_root" parent="menu_members_management_module_root" name="Applicants" sequence="30"/>
     <!-- Menu item for Applicants Dashboard -->
     <menuitem id="menu_applicants_dashbaord" name="Applicants Dashboard" parent="menu_applicants_management_root" action="action_view_applicants_dashboard" sequence="31"/> 
+    <!-- Menu item for All Applicants -->
+    <menuitem id="menu_all_applicants" name="All Applicants" parent="menu_applicants_management_root" action="action_view_all_applicants" sequence="32"/> 
     <!-- Menu item for New Applicants -->
-    <menuitem id="menu_new_applicants" name="New Applicants" parent="menu_applicants_management_root" action="action_view_new_applicants" sequence="32"/>  
+    <menuitem id="menu_new_applicants" name="New Applicants" parent="menu_applicants_management_root" action="action_view_new_applicants" sequence="33"/>  
     <!-- Menu item for Acknowledged Applicants -->
-    <menuitem id="menu_acknowledged_applicants" name="Receipt Acknowledged" parent="menu_applicants_management_root" action="action_view_acknowledged_applicants" sequence="33"/>
+    <menuitem id="menu_acknowledged_applicants" name="Receipt Acknowledged" parent="menu_applicants_management_root" action="action_view_acknowledged_applicants" sequence="34"/>
     <!-- Menu item for Applicants sent Interview Notice -->
-    <menuitem id="menu_notice_of_interview_applicants" name="Sent Notice of Interview" parent="menu_applicants_management_root" action="action_view_notice_of_interview_applicants" sequence="34"/>
+    <menuitem id="menu_notice_of_interview_applicants" name="Sent Notice of Interview" parent="menu_applicants_management_root" action="action_view_notice_of_interview_applicants" sequence="35"/>
     <!-- Menu item for Applicants sent Followup Letter -->
-    <menuitem id="menu_followup_letter_applicants" name="Sent Followup Letter" parent="menu_applicants_management_root" action="action_view_followup_letter_applicants" sequence="35"/>
+    <menuitem id="menu_followup_letter_applicants" name="Sent Followup Letter" parent="menu_applicants_management_root" action="action_view_followup_letter_applicants" sequence="36"/>
     <!-- Menu item for Applicants sent Welcome Letter -->
-    <menuitem id="menu_welcome_letter_applicants" name="Sent Welcome Letter" parent="menu_applicants_management_root" action="action_view_welcome_letter_applicants" sequence="36"/>
+    <menuitem id="menu_welcome_letter_applicants" name="Sent Welcome Letter" parent="menu_applicants_management_root" action="action_view_welcome_letter_applicants" sequence="37"/>
     <!-- Menu item for Applicants sent Orientation Notice -->
-    <menuitem id="menu_orientation_notice_applicants" name="Sent Orientation Notice" parent="menu_applicants_management_root" action="action_view_orientation_notice_applicants" sequence="37"/>
+    <menuitem id="menu_orientation_notice_applicants" name="Sent Orientation Notice" parent="menu_applicants_management_root" action="action_view_orientation_notice_applicants" sequence="38"/>
     <!-- Menu item for Applicants sent Orientation Notice -->
-    <menuitem id="menu_bylaws_applicants" name="Sent Bylaws" parent="menu_applicants_management_root" action="action_view_bylaws_applicants" sequence="38"/>  
+    <menuitem id="menu_bylaws_applicants" name="Sent Bylaws" parent="menu_applicants_management_root" action="action_view_bylaws_applicants" sequence="39"/>  
 </odoo>
