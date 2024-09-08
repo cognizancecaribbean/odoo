@@ -1,4 +1,10 @@
 <odoo>
+    <!-- Boatyard Map Action -->
+    <record id="action_boatyard_map" model="ir.actions.client">
+        <field name="name">Boatyard Map</field>
+        <field name="tag">boatyard_map</field> <!-- 'boatyard_map' corresponds to the key used in your JS registry -->
+    </record>
+
     <!-- Boat Space Booking -->
     <record id="view_boat_space_booking_calendar" model="ir.ui.view">
         <field name="name">boatyard.boat.space.booking.calendar</field>

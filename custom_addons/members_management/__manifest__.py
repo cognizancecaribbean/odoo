@@ -20,6 +20,14 @@
         'report/report_member_application_template.xml',
         'report/report_action.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'members_management/static/src/applicant_dashboard/totals_card.js',
+            'members_management/static/src/applicant_dashboard/totals_card_template.xml',
+            'members_management/static/src/applicant_dashboard/applicant_dashboard.js',
+            'members_management/static/src/applicant_dashboard/applicant_dashboard_template.xml',
+        ],
+    },    
     'installable': True,
     'application': True,
 }

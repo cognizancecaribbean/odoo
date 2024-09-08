@@ -241,27 +241,28 @@ class ArtisanRegistration(models.Model):
             'artisan_id': self.id,
             'activity_date': fields.Datetime.now(),
         })                 
-            
+          
+    # Get total artisans        
     @api.model
     def get_total_artisans(self):
         return self.search_count([])
-    
+    # Get total pending artisans
     @api.model
     def get_total_pending(self):
         return self.search_count([('state', '=', 'pending')])    
-
+    # Get total vetting artisans
     @api.model
     def get_total_vetting(self):
         return self.search_count([('state', '=', 'vetting')])
-
+    # Get total approved artisans
     @api.model
     def get_total_approved(self):
         return self.search_count([('state', '=', 'approved')])
-
+    # Get total denied artisans
     @api.model
     def get_total_denied(self):
         return self.search_count([('state', '=', 'denied')])
-
+    # Get artisan totals by tags
     @api.model
     def get_totals_by_tag(self):
         tag_model = self.env['artisan.tag']

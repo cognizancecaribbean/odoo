@@ -1,0 +1,14 @@
+.svg-container {
+    width: 100%; /* Adjust to fit the width of the parent container */
+    height: 100vh; /* Full viewport height or adjust as needed */
+    overflow: auto; /* Allow scrolling if content overflows */
+    position: relative; /* Make sure it's positioned correctly */
+}
+
+.svg-container svg {
+    display: block; /* Remove extra space below the SVG */
+    width: 100%; /* Fit to the container width */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure SVG doesn't exceed container width */
+    max-height: 100%; /* Ensure SVG doesn't exceed container height */
+}

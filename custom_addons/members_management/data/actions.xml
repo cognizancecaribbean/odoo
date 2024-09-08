@@ -1,9 +1,9 @@
 <odoo>
     <data>
-        <record id="product_membership" model="product.product">
+        <!-- <record id="product_membership" model="product.product">
             <field name="name">Membership</field>
             <field name="type">service</field>
-        </record>
+        </record> -->
 
         <!-- Server Actions -->
         <!-- Action: Acknowledge Application ////////////////////////////////////////////////////////////////////////////////////////////////// -->

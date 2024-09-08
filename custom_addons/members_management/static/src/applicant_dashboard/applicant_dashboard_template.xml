@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="members_management.ApplicantDashboardUI">
+        <div class="o_action_manager" style="direction: ltr; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; flex: 1 1 auto; height: 100%; overflow: hidden;overflow-y: auto; max-height: 100vh;">
+            <div class="container mt-5">
+                <h1>Applicants Dashboard</h1>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-sm-12 mt-4 mb-2">
+                                <h2>Current State</h2>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total Applicants'" total="state.totalApplicants" actionUrl="getActionUrl('view_applicant_tree')"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total New'" total="state.totalNewApplicants" actionUrl="getActionUrl('action_view_new_applicants')"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total Acknowledged'" total="state.totalAcknowledgedApplicants" actionUrl="getActionUrl('action_view_acknowledged_applicants')"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total for Interviews'" total="state.totalInterviewApplicants" actionUrl="getActionUrl('action_view_notice_of_interview_applicants')"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total Followups'" total="state.totalFollowupApplicants" actionUrl="getActionUrl('action_view_followup_letter_applicants')"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total Welcomed'" total="state.totalWelcomedApplicants" actionUrl="getActionUrl('action_view_welcome_letter_applicants')"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total for Orientation'" total="state.totalFollowupApplicants" actionUrl="getActionUrl('action_view_orientation_notice_applicants')"/>
+                            </div>
+                            <div class="col-md-4 col-sm-6 xs-12 mb-4">
+                                <TotalsCard title="'Total Received Bylaws'" total="state.totalApplicantsSentBylaws" actionUrl="getActionUrl('action_view_bylaws_applicants')"/>
+                            </div>
+                        </div> <!-- Close row div -->
+                    </div> <!-- Close col-lg-12 div -->
+                </div> <!-- Close row div -->          
+            </div> <!-- Close container div -->
+        </div> <!-- Close o_action_manager div -->
+    </t>
+</templates>

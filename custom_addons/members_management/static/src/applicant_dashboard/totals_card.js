@@ -6,6 +6,7 @@ class TotalsCard extends Component {
     static props = {
         title: String,
         total: Number,
+        actionUrl: String,
     };
 }
 

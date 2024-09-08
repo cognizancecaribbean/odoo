@@ -21,6 +21,13 @@
         'views/boat_specification_views.xml',
         'views/menus.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'boatyard_management/static/src/boatyard_map/boatyard_map.js',
+            'boatyard_management/static/src/boatyard_map/boatyard_map_template.xml',
+            'boatyard_management/static/src/css/boatyard_map.css',
+        ],
+    },     
     'installable': True,
     'application': True,
 }

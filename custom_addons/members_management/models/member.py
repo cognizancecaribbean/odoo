@@ -233,3 +233,49 @@ class Member(models.Model):
     _sql_constraints = [
         ('unique_email', 'unique(email)', 'A member or applicant with this email already exists!')
     ]
+    
+    
+    # Get total applicants        
+    @api.model
+    def get_total_applicants(self):
+        return self.search_count([('status', '=', 'applicant')])
+    # Get total new applicants
+    @api.model
+    def get_total_new_applicants(self):
+        return self.search_count([('status', '=', 'applicant'),('application_state', '=', 'new')])
+    # Get total acknowledged applicants
+    @api.model
+    def get_total_acknowledged_applicants(self):
+        return self.search_count([('status', '=', 'applicant'),('application_state', '=', 'acknowledged')])
+    # Get total applicants notified for interview
+    @api.model
+    def get_total_interview_applicants(self):
+        return self.search_count([('status', '=', 'applicant'),('application_state', '=', 'interview')])
+    # Get total applicants followed up
+    @api.model
+    def get_total_followup_applicants(self):
+        return self.search_count([('status', '=', 'applicant'),('application_state', '=', 'followup')])
+    # Get total welcomed applicants
+    @api.model
+    def get_total_welcomed_applicants(self):
+        return self.search_count([('status', '=', 'applicant'),('application_state', '=', 'welcomed')])
+    # Get total orientation applicants
+    @api.model
+    def get_total_orientation_applicants(self):
+        return self.search_count([('status', '=', 'applicant'),('application_state', '=', 'orientation')])
+    # Get total applicants sent bylaws
+    @api.model
+    def get_total_sent_bylaws_applicants(self):
+        return self.search_count([('status', '=', 'applicant'),('application_state', '=', 'bylaws')])
+    # Get total applicants sent quote
+    @api.model
+    def get_total_sent_quote_applicants(self):
+        return self.search_count([('status', '=', 'applicant'),('application_state', '=', 'quote_sent')])
+    # Get total applicants signed quotes
+    @api.model
+    def get_total_signed_quote_applicants(self):
+        return self.search_count([('status', '=', 'applicant'),('application_state', '=', 'quote_signed')])
+    # Get total applicants sub initialized
+    @api.model
+    def get_total_sub_initialized_applicants(self):
+        return self.search_count([('status', '=', 'applicant'),('application_state', '=', 'sub_initialized')])
