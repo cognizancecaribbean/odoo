@@ -443,7 +443,7 @@
                 <field name="last_name"/>
                 <field name="email"/>
                 <field name="mobile_number"/>
-                <field name="status"/>
+                <field name="application_state"/>
             </tree>
         </field>
     </record>
