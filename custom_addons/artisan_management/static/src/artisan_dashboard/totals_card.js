@@ -9,6 +9,6 @@ class TotalsCard extends Component {
     };
 }
 
-TotalsCard.template = "members_management.TotalsCard";
+TotalsCard.template = "artisan_management.TotalsCard";
 
 export default TotalsCard;
